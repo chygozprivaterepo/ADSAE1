@@ -68,11 +68,11 @@ public class Players {
 	/**
 	 * sort list in alphabetical order of surname
 	 */
-	/*public List<Player> sortBySurname()
+	public void sortBySurname()
 	{
-		
+		Collections.sort(players);
 	}
-	*/
+	
 	
 	/**
 	 * method to return all the player information in String format
@@ -83,6 +83,44 @@ public class Players {
 		for(Player p: players)
 			output += p + "\n";
 		return output;
+	}
+	
+	public void sortByHighScore()
+	{
+		Player [] temp = new Player[currentSize];
+		mergeSortR(players,0,currentSize-1,temp);
+	}
+	
+	/*
+	 * method to sort list in descending order of high score
+	 */
+	private void mergeSortR(List<Player> a, int first, int last, Player [] temp)
+	{
+		if(first == last)
+			return;
+		
+		int mid = (first + last) / 2;
+		mergeSortR(a,first,mid,temp);
+		mergeSortR(a,mid+1,last,temp);
+		
+		int l1 = first, l2 = mid+1, l3 = first;
+		
+		while(l1 <= mid && l2 <= last)
+		{
+			if(a.get(l1).getHighScore() > a.get(l2).getHighScore())
+				temp[l3++] = a.get(l1++);
+			else
+				temp[l3++] = a.get(l2++);
+		}
+		while(l1 <= mid)
+			temp[l3++] = a.get(l1++);
+		while(l2 <= last)
+			temp[l3++] = a.get(l2++);
+		
+		for(int i=first; i<=last; i++)
+		{
+			a.set(i, temp[i]);
+		}
 	}
 
 }

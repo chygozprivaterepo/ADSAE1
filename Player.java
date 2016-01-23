@@ -46,8 +46,8 @@ public class Player implements Comparable<Player>{
 	/**
 	 * @param gender the gender to set
 	 */
-	public void setGender(boolean gender) {
-		this.gender = gender;
+	public void setGender(String gender) {
+		this.gender =  gender.equals("(M)");
 	}
 
 	/**

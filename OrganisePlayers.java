@@ -20,14 +20,16 @@ public class OrganisePlayers {
 			String output = "";
 			output += String.format("The list of players is:%n%s", players);
 			output += String.format("%nThe high score is: %d%n", players.getHighScore());
-			Collections.sort(players.getPlayers());
+			players.sortBySurname();
 			output += String.format("%nThe (name)-sorted list is:%n%s", players);
+			players.sortByHighScore();
+			output += String.format("%nThe (high-score)-sorted list is:%n%s", players);
 			System.out.print(output);
 			
 			FileWriter writer = new FileWriter("output.txt");
 			writer.write(output);
 			
-			//close file
+			//close files
 			reader.close();
 			scanner.close();
 			writer.close();

@@ -2,3 +2,9 @@ Miller (F) 17
 Smith (M) 5
 Jones (F) 27
 Adams (M) 10
+Davidson (M) 20
+Roberts (F) 15
+Connely (M) 23
+Pitt (M) 25
+Jolie (F) 29
+Hanks (M) 13
