@@ -2,9 +2,11 @@ import java.util.*;
 
 public class Players {
 	
+	//instance variables
 	private List<Player> players;
 	private int currentSize;
 	
+	//constructor to initialize a Players object
 	public Players()
 	{
 		players = new ArrayList<Player>();
@@ -19,6 +21,9 @@ public class Players {
 		currentSize++;
 	}
 	
+	/**
+	 * @param p the player to be removed
+	 */
 	public void remove(Player p)
 	{
 		players.remove(p);
@@ -73,7 +78,6 @@ public class Players {
 		Collections.sort(players);
 	}
 	
-	
 	/**
 	 * method to return all the player information in String format
 	 */
@@ -92,19 +96,21 @@ public class Players {
 	}
 	
 	/*
-	 * method to sort list in descending order of high score
+	 * recursive method to sort list in descending order of high score
 	 */
 	private void mergeSortR(List<Player> a, int first, int last, Player [] temp)
 	{
+		//base condition of recursion.
 		if(first == last)
 			return;
 		
+		//split list into 2 parts
 		int mid = (first + last) / 2;
-		mergeSortR(a,first,mid,temp);
-		mergeSortR(a,mid+1,last,temp);
+		mergeSortR(a,first,mid,temp); //sort first half recursively
+		mergeSortR(a,mid+1,last,temp); //sort second half recursively
 		
+		//merge a half of the list
 		int l1 = first, l2 = mid+1, l3 = first;
-		
 		while(l1 <= mid && l2 <= last)
 		{
 			if(a.get(l1).getHighScore() > a.get(l2).getHighScore())
