@@ -1,0 +1,13 @@
+The list of players is:
+Miller (F) 17
+Smith (M) 5
+Jones (F) 27
+Adams (M) 10
+
+The high score is: 27
+
+The (name)-sorted list is:
+Adams (M) 10
+Jones (F) 27
+Miller (F) 17
+Smith (M) 5

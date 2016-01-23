@@ -58,9 +58,31 @@ public class Players {
 	 */
 	public int getHighScore()
 	{
-		Player [] p = (Player[]) players.toArray(); 
-		Arrays.sort(p);
-		return p[currentSize].getHighScore();
+		int highest = 0;
+		for(Player p: players)
+			if(p.getHighScore() > highest)
+				highest = p.getHighScore();
+		return highest;
 	}
 	
+	/**
+	 * sort list in alphabetical order of surname
+	 */
+	/*public List<Player> sortBySurname()
+	{
+		
+	}
+	*/
+	
+	/**
+	 * method to return all the player information in String format
+	 */
+	public String toString()
+	{
+		String output = "";
+		for(Player p: players)
+			output += p + "\n";
+		return output;
+	}
+
 }

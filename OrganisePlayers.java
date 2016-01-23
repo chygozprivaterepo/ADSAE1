@@ -4,7 +4,7 @@ import java.util.*;
 public class OrganisePlayers {
 
 	public static void main(String[] args) {
-		
+		Players players = new Players();
 		try
 		{
 			//open text file to read player information
@@ -14,12 +14,23 @@ public class OrganisePlayers {
 			{
 				String line = scanner.nextLine();
 				Player player = new Player(line);
-				System.out.println(player);
+				players.add(player);
 			}
+			
+			String output = "";
+			output += String.format("The list of players is:%n%s", players);
+			output += String.format("%nThe high score is: %d%n", players.getHighScore());
+			Collections.sort(players.getPlayers());
+			output += String.format("%nThe (name)-sorted list is:%n%s", players);
+			System.out.print(output);
+			
+			FileWriter writer = new FileWriter("output.txt");
+			writer.write(output);
 			
 			//close file
 			reader.close();
 			scanner.close();
+			writer.close();
 		}
 		catch(FileNotFoundException e)
 		{

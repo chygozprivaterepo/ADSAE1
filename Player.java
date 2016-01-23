@@ -5,28 +5,21 @@ public class Player implements Comparable<Player>{
 	private boolean gender; //true for male, false for female
 	private int highScore;
 	
+	/*
+	 * constructor to initialize a Player object
+	 */
 	public Player(String line)
 	{
-		String [] tokens = line.split("[ ]+");
-		surname = tokens[0];
-		/*
-		if(tokens[1].equals("(M)"))
-			gender = true;
-		else if(tokens[1].equals("(F)"))
-			gender = false;
-			*/
-		gender = tokens[1].equals("(M)");
-		highScore = Integer.parseInt(tokens[2]);
+		String [] tokens = line.split("[ ]+"); //splits the line parameter into an array of strings
+		surname = tokens[0]; //the surname will be contained at index 0 of the array
+		gender = tokens[1].equals("(M)"); //the gender string will be contained at index 1 of the array.
+						//if gender string is (M), the gender is true, otherwise gender is false
+		highScore = Integer.parseInt(tokens[2]); //the high score will be at index 2 of the array
 	}
 	
 	public int compareTo(Player p)
 	{
-		if (this.highScore > p.highScore)
-			return 1;
-		else if (this.highScore < p.highScore)
-			return -1;
-		else		
-			return 0;
+		return this.surname.compareTo(p.surname);
 	}
 
 	/**
@@ -72,7 +65,7 @@ public class Player implements Comparable<Player>{
 	}
 
 	/** 
-	 * method to return string representation of a player object
+	 * method to return a string representation of a player object
 	 */
 	public String toString() {
 		String gen = (gender) ? "(M)" : "(F)";
