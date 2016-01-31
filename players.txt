@@ -8,3 +8,14 @@ Connely (M) 23
 Pitt (M) 25
 Jolie (F) 29
 Hanks (M) 13
+Peterson (M) 34
+Brosnan (M) 40
+Johanssen (F) 31
+Theron (F) 35
+Berry (F) 38
+Cooper (M) 41
+Elba (M) 43
+Mcadams (F) 58
+Ejiofor (M) 55
+Dicaprio (M) 60
+Craig (M) 75

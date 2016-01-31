@@ -1,6 +1,7 @@
 
-public class Player implements Comparable<Player>{
+public class Player implements Comparable{
 
+	//instance variables
 	private String surname;
 	private boolean gender; //true for male, false for female
 	private int highScore;
@@ -17,8 +18,10 @@ public class Player implements Comparable<Player>{
 		highScore = Integer.parseInt(tokens[2]); //the high score will be at index 2 of the array
 	}
 	
-	public int compareTo(Player p)
+	//compares the surnames of two Player objects
+	public int compareTo(Object o)
 	{
+		Player p = (Player)o;
 		return this.surname.compareTo(p.surname);
 	}
 

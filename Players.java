@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 
 public class Players {
@@ -9,14 +10,34 @@ public class Players {
 	//constructor to initialize a Players object
 	public Players()
 	{
-		players = new ArrayList<Player>();
+		players = new ArrayList<Player>(); //create a new list
+		currentSize = 0;
+		try{
+			//open text file to read player information
+			FileReader reader = new FileReader("players.txt");
+			Scanner scanner = new Scanner(reader);
+			while(scanner.hasNextLine()) //while there is still a line of text to be read
+			{
+				String line = scanner.nextLine();
+				add(line); //add the player to the list
+			}
+			reader.close(); 
+			scanner.close();
+		}
+		catch (FileNotFoundException e){
+			System.out.println("The specified file could not be found");
+		}
+		catch (IOException e){
+			System.out.println("An I/O Exception has occured");
+		}
 	}
 	
 	/**
 	 * @param p the player to be added
 	 */
-	public void add(Player p)
+	public void add(String line)
 	{
+		Player p = new Player(line); //create a new player object from a line read from text file
 		players.add(p);
 		currentSize++;
 	}
@@ -24,38 +45,13 @@ public class Players {
 	/**
 	 * @param p the player to be removed
 	 */
-	public void remove(Player p)
+	public void remove(String pName)
 	{
-		players.remove(p);
-		currentSize--;
-	}
-
-	/**
-	 * @return the players
-	 */
-	public List<Player> getPlayers() {
-		return players;
-	}
-
-	/**
-	 * @param players the players to set
-	 */
-	public void setPlayers(ArrayList<Player> players) {
-		this.players = players;
-	}
-
-	/**
-	 * @return the currentSize
-	 */
-	public int getCurrentSize() {
-		return currentSize;
-	}
-
-	/**
-	 * @param currentSize the currentSize to set
-	 */
-	public void setCurrentSize(int currentSize) {
-		this.currentSize = currentSize;
+		Player p = getPlayer(pName);
+		if(p != null){
+			players.remove(p);
+			currentSize--;
+		}
 	}
 	
 	/**
@@ -68,6 +64,12 @@ public class Players {
 			if(p.getHighScore() > highest)
 				highest = p.getHighScore();
 		return highest;
+	}
+	
+	public void setPlayerHighScore(String pName, int score){
+		Player p = getPlayer(pName);
+		if(p != null)
+			p.setHighScore(score);
 	}
 	
 	/**
@@ -95,8 +97,25 @@ public class Players {
 		mergeSortR(players,0,currentSize-1,temp);
 	}
 	
+
+	/**
+	 * method to search the List and return a player object with the name provided
+	 * @param pName is the name of the player to be searched for
+	 * @return the player corresponding to that name
+	 */
+	public Player getPlayer(String pName){
+		//search through list of players
+		for(Player p: players){
+			if(p.getSurname().equals(pName)) //if player is found, return player
+				return p;
+		}
+		System.out.println("No player with that name exists");
+		return null; //else return null indicating that the player was not found
+	}
+
+	
 	/*
-	 * recursive method to sort list in descending order of high score
+	 * merge sort using recursion to sort list in descending order of high score
 	 */
 	private void mergeSortR(List<Player> a, int first, int last, Player [] temp)
 	{
@@ -109,8 +128,9 @@ public class Players {
 		mergeSortR(a,first,mid,temp); //sort first half recursively
 		mergeSortR(a,mid+1,last,temp); //sort second half recursively
 		
-		//merge a half of the list
+		//merge both parts of the list
 		int l1 = first, l2 = mid+1, l3 = first;
+		//while both halves still have elements in them
 		while(l1 <= mid && l2 <= last)
 		{
 			if(a.get(l1).getHighScore() > a.get(l2).getHighScore())
@@ -118,8 +138,10 @@ public class Players {
 			else
 				temp[l3++] = a.get(l2++);
 		}
+		//while only one half has elements in it
 		while(l1 <= mid)
 			temp[l3++] = a.get(l1++);
+		//while only the second half has elements in it
 		while(l2 <= last)
 			temp[l3++] = a.get(l2++);
 		
@@ -128,5 +150,20 @@ public class Players {
 			a.set(i, temp[i]);
 		}
 	}
-
+	
+	public void save(String output){
+		try{
+			//create an output text file and save the result of the above operations to it
+			FileWriter writer = new FileWriter("output.txt");
+			writer.write(output); 
+			
+			//close file
+			writer.close();
+		}
+		catch(IOException e)
+		{
+			System.out.println("An I/O Exception occured while trying to operate on the file");
+		}
+	}
+	
 }
