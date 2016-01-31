@@ -66,8 +66,14 @@ public class Players {
 		return highest;
 	}
 	
+	/**
+	 * method to change a player's high score
+	 * @param pName is the name of the player
+	 * @param score is the new score of the player
+	 */
 	public void setPlayerHighScore(String pName, int score){
-		Player p = getPlayer(pName);
+		Player p = getPlayer(pName); //get the player with the name
+		//if the player exists, set the score
 		if(p != null)
 			p.setHighScore(score);
 	}

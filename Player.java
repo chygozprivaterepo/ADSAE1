@@ -83,7 +83,7 @@ public class Player {
 	 */
 	public static class scoreComparator implements Comparator<Player>{
 		public int compare(Player p1, Player p2){
-			//multiplied by -1 to sort in decreasing order
+			//multiply by -1 to sort in decreasing order
 			return -1 * ((Integer)p1.getHighScore()).compareTo((Integer)p2.getHighScore());
 		}
 	}
