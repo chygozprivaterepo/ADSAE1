@@ -1,5 +1,6 @@
+import java.util.Comparator;
 
-public class Player implements Comparable{
+public class Player {
 
 	//instance variables
 	private String surname;
@@ -16,13 +17,6 @@ public class Player implements Comparable{
 		gender = tokens[1].equals("(M)"); //the gender string will be contained at index 1 of the array.
 						//if gender string is (M), the gender is true, otherwise gender is false
 		highScore = Integer.parseInt(tokens[2]); //the high score will be at index 2 of the array
-	}
-	
-	//compares the surnames of two Player objects
-	public int compareTo(Object o)
-	{
-		Player p = (Player)o;
-		return this.surname.compareTo(p.surname);
 	}
 
 	/**
@@ -73,6 +67,25 @@ public class Player implements Comparable{
 	public String toString() {
 		String gen = (gender) ? "(M)" : "(F)";
 		return surname + " " + gen + " " +  highScore;
+	}
+	
+	/**
+	 * comparator to sort a list of players in increasing order of surname
+	 */
+	public static class nameComparator implements Comparator<Player>{
+		public int compare(Player p1, Player p2){
+			return p1.getSurname().compareTo(p2.getSurname());
+		}
+	}
+	
+	/**
+	 * comparator to sort a list of players in decreasing order of high score
+	 */
+	public static class scoreComparator implements Comparator<Player>{
+		public int compare(Player p1, Player p2){
+			//multiplied by -1 to sort in decreasing order
+			return -1 * ((Integer)p1.getHighScore()).compareTo((Integer)p2.getHighScore());
+		}
 	}
 	
 }

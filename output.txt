@@ -34,7 +34,6 @@ The new high score is: 78
 Removing a player named "Berry" from the list
 The new high score is: 78
 
-
 The (name)-sorted list is:
 Adams (M) 10
 Brosnan (M) 40

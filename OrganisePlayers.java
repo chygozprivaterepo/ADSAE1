@@ -28,11 +28,11 @@ public class OrganisePlayers {
 		output += String.format("The new high score is: %d%n%n", players.getHighScore()); //get the high score
 		
 		//re-order list in increasing order of surname
-		players.sortBySurname(); 
-		output += String.format("%nThe (name)-sorted list is:%n%s", players);
+		Collections.sort(players.getPlayers(), new Player.nameComparator()); 
+		output += String.format("The (name)-sorted list is:%n%s", players);
 		
 		//re-order list in descending order of high score
-		players.sortByHighScore(); 
+		Collections.sort(players.getPlayers(), new Player.scoreComparator());
 		output += String.format("%nThe (high-score)-sorted list is:%n%s", players);
 		
 		//save the result of the above operations to an output file

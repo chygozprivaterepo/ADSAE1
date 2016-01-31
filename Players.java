@@ -73,14 +73,6 @@ public class Players {
 	}
 	
 	/**
-	 * sort list in alphabetical order of surname
-	 */
-	public void sortBySurname()
-	{
-		Collections.sort(players);
-	}
-	
-	/**
 	 * method to return all the player information in String format
 	 */
 	public String toString()
@@ -90,13 +82,6 @@ public class Players {
 			output += p + "\n";
 		return output;
 	}
-	
-	public void sortByHighScore()
-	{
-		Player [] temp = new Player[currentSize];
-		mergeSortR(players,0,currentSize-1,temp);
-	}
-	
 
 	/**
 	 * method to search the List and return a player object with the name provided
@@ -112,45 +97,19 @@ public class Players {
 		System.out.println("No player with that name exists");
 		return null; //else return null indicating that the player was not found
 	}
-
 	
-	/*
-	 * merge sort using recursion to sort list in descending order of high score
+	/**
+	 * method to return the players list
+	 * @return
 	 */
-	private void mergeSortR(List<Player> a, int first, int last, Player [] temp)
-	{
-		//base condition of recursion.
-		if(first == last)
-			return;
-		
-		//split list into 2 parts
-		int mid = (first + last) / 2;
-		mergeSortR(a,first,mid,temp); //sort first half recursively
-		mergeSortR(a,mid+1,last,temp); //sort second half recursively
-		
-		//merge both parts of the list
-		int l1 = first, l2 = mid+1, l3 = first;
-		//while both halves still have elements in them
-		while(l1 <= mid && l2 <= last)
-		{
-			if(a.get(l1).getHighScore() > a.get(l2).getHighScore())
-				temp[l3++] = a.get(l1++);
-			else
-				temp[l3++] = a.get(l2++);
-		}
-		//while only one half has elements in it
-		while(l1 <= mid)
-			temp[l3++] = a.get(l1++);
-		//while only the second half has elements in it
-		while(l2 <= last)
-			temp[l3++] = a.get(l2++);
-		
-		for(int i=first; i<=last; i++)
-		{
-			a.set(i, temp[i]);
-		}
+	public List<Player> getPlayers(){
+		return players;
 	}
 	
+	/**
+	 * method to save to output file
+	 * @param output is the string to be saved
+	 */
 	public void save(String output){
 		try{
 			//create an output text file and save the result of the above operations to it
